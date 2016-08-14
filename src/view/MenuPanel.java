@@ -24,7 +24,7 @@ public class MenuPanel extends JPanel implements ActionListener {
         this.cluedo = cluedo;
         this.game = cluedo.getGame();
         initButtons();
-        setBackground(Color.black);
+        setBackground(new Color(255, 255, 255));
         setPreferredSize(new Dimension(BoardFrame.BOARD_WIDTH - 500, BoardFrame.BOARD_HEIGHT));
     }
 

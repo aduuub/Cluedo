@@ -30,7 +30,10 @@ public class Cluedo {
      * Construct a new game of Cluedo
      */
     public Cluedo() {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3b8a1085e6ba04809f2139f7c058077ba21d5632
     }
 
     /**
@@ -144,7 +147,7 @@ public class Cluedo {
      *
      * @param message
      */
-    public void addToCuurentPlayersJournal(String message) {
+    public void addToCurrentPlayersJournal(String message) {
         assert currentPlayer != null;
         currentPlayer.getJournal().addToJournal(message);
     }
