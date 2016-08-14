@@ -30,7 +30,7 @@ public class Cluedo {
      * Construct a new game of Cluedo
      */
     public Cluedo() {
-        startGame();
+        //startGame();
         //runGame();
     }
 
@@ -38,35 +38,25 @@ public class Cluedo {
      * Starts a new Game, gets the number of players, sets the characters, creates a random solution, distributes the
      * remaining cards to all the players.
      */
-    public void startGame() {
-        // Get number of players
-        int numberOfPlayers = IO.getIntBetweenBounds("You can have between 3 and 6 players, how many would you like?", 3, 6);
-
+    public void setupGame(List<CharacterCard.Character> choosenCharacters) {
         // Create the Card objects and init the player list
         List<CharacterCard> characters = CharacterCard.generateObjects();
         List<WeaponCard> weapons = WeaponCard.generateObjects();
         List<RoomCard> rooms = RoomCard.generateObjects();
+
+        // Set up players
+        choosenCharacters.forEach(p -> characters.remove(p));
         this.players = new ArrayList<>();
+        choosenCharacters.forEach(p -> players.add(new Player(p)));
 
         // Shuffle the stack
         Collections.shuffle(characters);
         Collections.shuffle(weapons);
         Collections.shuffle(rooms);
-        List<CharacterCard> characterDel = CharacterCard.generateObjects();
 
-        // Ask for the players
-        for (int i = 0; i < numberOfPlayers; i++) {
-            String playersLeft = characterDel.toString();
-            String msg = "\nPlayers left: \n" + playersLeft + "\n" +
-                    "What character would you like? \n(enter number between 1 and " + characterDel.size() + ")\n";
-            int wantedIndex = IO.getIntBetweenBounds(msg, 1, characterDel.size()) - 1;
-            CharacterCard card = characterDel.remove(wantedIndex);
-            Player newPlayer = new Player((CharacterCard.Character) card.getValue());
-            players.add(newPlayer);
-        }
-
-        // create solution list
+        // Set up the solution
         List<Card> solution = new ArrayList<>();
+
         // Add random character
         int random = (int) (Math.random() * characters.size());
         solution.add(characters.get(random));
@@ -88,60 +78,6 @@ public class Cluedo {
         this.currentGame = new Game(players, solution, weapons, rooms, characters);
         this.board = currentGame.getBoard();
     }
-
-
-    /**
-     * Continually runs the game until its completed
-     */
-    public void runGame() {
-        int currentPlayerIndex = 0;
-
-        while (!currentGame.isFinished()) {
-            Player currentPlayer = players.get(currentPlayerIndex);
-
-            boolean hasMoved = false; // has the player moved this turn?
-            turn:
-            while (true) {
-
-                if (currentPlayer.isEliminated() || currentGame.isFinished()) { // The player cannot play if they are already eliminated
-                    break;
-                }
-
-                switch (IO.getIntBetweenBounds("What would you like to do?", 1, 7)) {
-                    case 1:
-                        if (hasMoved) {
-                            System.out.println("You can only move once per turn");
-                            break;
-                        }
-                        hasMoved = true;
-                        movePlayer(currentPlayer);
-                        break;
-                    case 2:
-                        //Accusation.suggest(currentPlayer, currentGame, board);
-                        break turn;
-                    case 3:
-                        //Accusation.accuse(currentPlayer, currentGame, board);
-                        break;
-                    case 4: // Show Hand
-                        System.out.println("Your cards: \n" + currentPlayer.printCards());
-                        break;
-                    case 5:
-                        addToJournal(currentPlayer);
-                        break;
-                    case 6: // Show Journal
-                        System.out.println(currentPlayer.getJournal().getContents());
-                        break;
-                    case 7: // End turn
-                        break turn;
-                    default:
-                        System.out.println("Invalid option, please enter a number between 1 and 7");
-                }
-            }
-            // Move the index onto the next player
-            currentPlayerIndex = (currentPlayerIndex == players.size() - 1) ? 0 : currentPlayerIndex + 1;
-        }
-    }
-
 
     /**
      * Called when its the players turn to move, performs dice roll and physical movement of the player
@@ -205,16 +141,18 @@ public class Cluedo {
     }
 
     /**
-     * Adds a message to the players Journal
+     * Adds a message to the current players Journal. The current player should not be null when this is called.
      *
-     * @param p
+     * @param message
      */
-    public void addToJournal(Player p) {
-        System.out.println("Your Journal: \n" + p.getJournal().getContents() + "\n");
-        String input = IO.getString("What would you like to add? \n");
-        p.getJournal().addToJournal(input);
+    public void addToCuurentPlayersJournal(String message) {
+        assert currentPlayer != null;
+        currentPlayer.getJournal().addToJournal(message);
     }
 
+    /**
+     * Advance the currentPlayer to be the next player. This is the player after the the currentPlayer in players
+     */
     public void nextPlayer(){
         if(currentPlayer == null) {
             currentPlayer = players.get(0);
@@ -226,18 +164,18 @@ public class Cluedo {
         assert currentPlayer != null;
     }
 
-    public Game getGame(){return this.currentGame;}
 
     /**
      * Constructs a new Cluedo Game
-     *
      * @param args
      */
     public static void main(String args[]) {
         new Cluedo();
-        //Runnable r = () -> new BoardFrame("Adam", new Cluedo().getGame(), new KeyListener[0]);
-        //javax.swing.SwingUtilities.invokeLater(r);
     }
 
+    /* Getters and setters */
+
     public Player getCurrentPlayer(){ return this.currentPlayer;}
+    public Game getGame(){return this.currentGame;}
+
 }
