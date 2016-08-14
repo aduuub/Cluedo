@@ -24,6 +24,7 @@ public class Cluedo {
     private Game currentGame;
     private List<Player> players;
     private Board board;
+    private Player currentPlayer;
 
     /**
      * Construct a new game of Cluedo
@@ -105,7 +106,7 @@ public class Cluedo {
                 if (currentPlayer.isEliminated() || currentGame.isFinished()) { // The player cannot play if they are already eliminated
                     break;
                 }
-                displayAvaliableOptions();
+
                 switch (IO.getIntBetweenBounds("What would you like to do?", 1, 7)) {
                     case 1:
                         if (hasMoved) {
@@ -214,18 +215,14 @@ public class Cluedo {
         p.getJournal().addToJournal(input);
     }
 
-    /**
-     * Display the options available at the current time
-     */
-    public void displayAvaliableOptions() {
-        String options = "\n1. Move \n" +
-                "2. Suggest (ends turn) \n" +
-                "3. Accuse \n" +
-                "4. Show Hand \n" +
-                "5. Add to Journal \n" +
-                "6. View Journal \n" +
-                "7. End Turn \n";
-        System.out.println(options);
+    public void nextPlayer(){
+        if(currentPlayer == null) {
+            currentPlayer = players.get(0);
+        }else{
+            int index = players.indexOf(currentPlayer);
+            index = index == players.size() - 1 ?
+        }
+
     }
 
     public Game getGame(){return this.currentGame;}
