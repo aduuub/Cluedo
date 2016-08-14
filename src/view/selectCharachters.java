@@ -119,7 +119,7 @@ public class selectCharachters extends JDialog implements ActionListener{
             default: throw new CluedoError("invalid player");
         }
         if(numPlayer == 0){
-            
+
         }
     }
 }

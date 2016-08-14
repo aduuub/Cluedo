@@ -51,7 +51,7 @@ public class BoardCanvas extends Canvas {
     public BoardCanvas(Cluedo cluedo) {
         this.cluedo = cluedo;
         this.game = cluedo.getGame();
-     //   this.board = game.getBoard();
+
         this.boardImage = loadImage("boardImage.png");
         setVisible(true);
     }
