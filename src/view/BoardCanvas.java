@@ -44,32 +44,24 @@ public class BoardCanvas extends Canvas {
     private Font font;
     private final Game game;
     private final Board board;
+    private Image boardImage;
 
     public BoardCanvas(Game gameBoard) {
         this.game = gameBoard;
         this.board = gameBoard.getBoard();
+        this.boardImage = loadImage("boardImage.png");
         setVisible(true);
-       // drawMessage("chur boi", getGraphics());
     }
 
 
     @Override
-    public void paint(Graphics g){
-        ImageObserver observer = (img, infoflags, x, y, width, height) -> false;
-        
-        //g.drawImage("boardImage.png", 0, 0, observer);
+    public void paint(Graphics g) {
+       g.drawImage(boardImage, 0, 0, null);
     }
 
-
-
-
-
-    public void setUpCharacter(){
+    public void setUpCharacter() {
 
     }
-
-
-    private static final String[] trails = {"st", "nd", "rd", "th", "th", "th", "th", "th", "th", "th"};
 
 
     private void drawMessage(String msg, Graphics g) {
@@ -134,18 +126,11 @@ public class BoardCanvas extends Canvas {
      * @return
      */
     public static Image loadImage(String filename) {
-        // using the URL means the image loads when stored
-        // in a jar or expanded into individual files.
-        java.net.URL imageURL = BoardCanvas.class.getResource(IMAGE_PATH
-                + filename);
-
         try {
-            Image img = ImageIO.read(imageURL);
-            return img;
+            return ImageIO.read(new File(IMAGE_PATH + filename));
         } catch (IOException e) {
-            // we've encountered an error loading the image. There's not much we
-            // can actually do at this point, except to abort the game.
-            throw new RuntimeException("Unable to load image: " + filename);
+            e.printStackTrace();
         }
+        return null;
     }
 }

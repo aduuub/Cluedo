@@ -23,8 +23,6 @@ public class Cluedo {
 
     private Game currentGame;
     private List<Player> players;
-    private final String cluedoTitle = "Welcome to Cluedo";
-    private final String seperator = "--------------------------------------------";
     private Board board;
 
     /**
@@ -40,8 +38,6 @@ public class Cluedo {
      * remaining cards to all the players.
      */
     public void startGame() {
-        System.out.println(cluedoTitle + "");
-
         // Get number of players
         int numberOfPlayers = IO.getIntBetweenBounds("You can have between 3 and 6 players, how many would you like?", 3, 6);
 
@@ -101,10 +97,6 @@ public class Cluedo {
 
         while (!currentGame.isFinished()) {
             Player currentPlayer = players.get(currentPlayerIndex);
-
-            // Display players turn and options
-            System.out.println("\n " + seperator + "\nIt's now " + currentPlayer.getCharacter().toString() +
-                    "'s turn. \n" + seperator + "\n");
 
             boolean hasMoved = false; // has the player moved this turn?
             turn:
