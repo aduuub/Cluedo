@@ -1,5 +1,6 @@
 package view;
 
+import cluedo.Cluedo;
 import cluedo.Game;
 
 import javax.swing.*;
@@ -18,41 +19,38 @@ public class BoardFrame extends JFrame {
     public static final int BOARD_HEIGHT = 540;
 
     private final BoardCanvas canvas;
-    private final Game game;
+    private final Cluedo cluedo;
     private final Toolkit toolkit;
 
     private JPanel menuPanel;
 
-    public BoardFrame(String title, Game game, KeyListener[] keys) {
+    public BoardFrame(String title, Cluedo cluedo, KeyListener[] keys) {
         super(title);
         setLayout(new BorderLayout());
 
         this.toolkit = getToolkit();
-        this.game = game;
-        this.canvas = new BoardCanvas(game);
-
-        this.menuPanel = new MenuPanel(game);
+        this.cluedo = cluedo;
+        this.canvas = new BoardCanvas(cluedo);
+        this.menuPanel = new MenuPanel(cluedo);
         add(menuPanel, BorderLayout.LINE_END);
 
-        setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
-
         // Display window
+        setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
         setVisible(true);
-        pack();
         setResizable(true);
+        pack();
 
         // Title and Menu bar
         setTitle("Cluedo");
         setMenuBar();
 
+        // Layout
         setLayout(new BorderLayout());
-        for (KeyListener k : keys) {
-            canvas.addKeyListener(k);
-        }
-
         add(canvas, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvas.requestFocus();
+
+        CharachtersDialog dialog = new CharachtersDialog(this);
     }
 
     public void setMenuBar() {
@@ -105,9 +103,10 @@ public class BoardFrame extends JFrame {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
-            Game game = new Game(null, null, null, null, null);
-            BoardFrame ex = new BoardFrame("Adam", game, new KeyListener[0]);
+            Cluedo cluedo = new Cluedo();
+            BoardFrame ex = new BoardFrame("Adam", cluedo, new KeyListener[0]);
             ex.setVisible(true);
+
         });
     }
 }

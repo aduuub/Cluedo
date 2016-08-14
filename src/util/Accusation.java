@@ -21,7 +21,8 @@ public class Accusation {
     /**
      * Accuse a player of the crime
      */
-    public static void accuse(Player currentPlayer, Game currentGame, Board board) {
+    public static void accuse(Player currentPlayer, Game currentGame) {
+        Board board = currentGame.getBoard();
         List<Card> solution = getWeaponCharacterRoom(currentPlayer, board);
 
         // Check solution
@@ -38,7 +39,8 @@ public class Accusation {
     /**
      * Suggest a player of the crime
      */
-    public static void suggest(Player currentPlayer, Game currentGame, Board board) {
+    public static void suggest(Player currentPlayer, Game currentGame) {
+        Board board = currentGame.getBoard();
         List<Card> solution = getWeaponCharacterRoom(currentPlayer, board);
         Card cardProvedWrong = proveSolutionWrong(currentPlayer, solution, currentGame.getPlayers());
 

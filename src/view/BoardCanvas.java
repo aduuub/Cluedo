@@ -18,6 +18,7 @@
 
 package view;
 
+import cluedo.Cluedo;
 import cluedo.Game;
 
 import java.io.*;
@@ -42,13 +43,15 @@ public class BoardCanvas extends Canvas {
 
     private static final String[] preferredFonts = {"Courier New", "Arial", "Times New Roman"};
     private Font font;
+    private Cluedo cluedo;
     private final Game game;
     private final Board board;
     private Image boardImage;
 
-    public BoardCanvas(Game gameBoard) {
-        this.game = gameBoard;
-        this.board = gameBoard.getBoard();
+    public BoardCanvas(Cluedo cluedo) {
+        this.cluedo = cluedo;
+        this.game = cluedo.getGame();
+        this.board = game.getBoard();
         this.boardImage = loadImage("boardImage.png");
         setVisible(true);
     }

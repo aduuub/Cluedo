@@ -2,6 +2,7 @@ package view;
 
 import cluedo.Cluedo;
 import cluedo.Game;
+import util.Accusation;
 import util.CluedoError;
 
 import javax.swing.*;
@@ -16,16 +17,18 @@ public class MenuPanel extends JPanel implements ActionListener {
 
     private final int BUTTON_WIDTH = 120;
     private final int BUTTON_HEIGHT = 40;
+    private Cluedo cluedo;
     private Game game;
 
-    public MenuPanel(Game game) {
-        this.game = game;
-        intitButtons();
+    public MenuPanel(Cluedo cluedo) {
+        this.cluedo = cluedo;
+        this.game = cluedo.getGame();
+        initButtons();
         setBackground(Color.black);
         setPreferredSize(new Dimension(BoardFrame.BOARD_WIDTH - 500, BoardFrame.BOARD_HEIGHT));
     }
 
-    public void intitButtons() {
+    public void initButtons() {
 
         // Move Button
         JButton b1 = new JButton("Move");
@@ -71,10 +74,10 @@ public class MenuPanel extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch(e.getActionCommand()){
-            case "Move": break;
-            case "Suggest": break;
-            case "Accuse": break;
-            case "End_Turn": break;
+            case "Move": break; // TODO
+            case "Suggest": Accusation.suggest(cluedo.getCurrentPlayer(), game);
+            case "Accuse": Accusation.accuse(cluedo.getCurrentPlayer(), game);
+            case "End_Turn": cluedo.nextPlayer();
             default: throw new CluedoError("Unrecognised button action command");
         }
     }

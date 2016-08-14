@@ -31,7 +31,7 @@ public class Cluedo {
      */
     public Cluedo() {
         startGame();
-        runGame();
+        //runGame();
     }
 
     /**
@@ -117,10 +117,10 @@ public class Cluedo {
                         movePlayer(currentPlayer);
                         break;
                     case 2:
-                        Accusation.suggest(currentPlayer, currentGame, board);
+                        //Accusation.suggest(currentPlayer, currentGame, board);
                         break turn;
                     case 3:
-                        Accusation.accuse(currentPlayer, currentGame, board);
+                        //Accusation.accuse(currentPlayer, currentGame, board);
                         break;
                     case 4: // Show Hand
                         System.out.println("Your cards: \n" + currentPlayer.printCards());
@@ -220,9 +220,10 @@ public class Cluedo {
             currentPlayer = players.get(0);
         }else{
             int index = players.indexOf(currentPlayer);
-            index = index == players.size() - 1 ?
+            index = (index == players.size() - 1) ? 0 : index + 1;
+            currentPlayer = players.get(index);
         }
-
+        assert currentPlayer != null;
     }
 
     public Game getGame(){return this.currentGame;}
@@ -237,4 +238,6 @@ public class Cluedo {
         //Runnable r = () -> new BoardFrame("Adam", new Cluedo().getGame(), new KeyListener[0]);
         //javax.swing.SwingUtilities.invokeLater(r);
     }
+
+    public Player getCurrentPlayer(){ return this.currentPlayer;}
 }
