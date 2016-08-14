@@ -35,7 +35,7 @@ public class selectCharachters extends JDialog implements ActionListener{
         this.cluedo = cluedo;
 
 
-        setSize(500,500);
+        setSize(800,800);
 
         sc =  new JButton(new ImageIcon("images/characters/Miss Scarlet.png"));
         sc.setActionCommand("MISS_SCARLETTE");
@@ -119,6 +119,8 @@ public class selectCharachters extends JDialog implements ActionListener{
             default: throw new CluedoError("invalid player");
         }
         if(numPlayer == 0){
+        	dispose();
+        	this.cluedo.setupGame(characters);
 
         }
     }

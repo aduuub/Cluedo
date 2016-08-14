@@ -38,7 +38,8 @@ public class Cluedo {
      * remaining cards to all the players.
      */
     public void setupGame(List<CharacterCard.Character> choosenCharacters) {
-        // Create the Card objects and init the player list
+    	System.out.println(choosenCharacters);
+    	// Create the Card objects and init the player list
         List<CharacterCard> characters = CharacterCard.generateObjects();
         List<WeaponCard> weapons = WeaponCard.generateObjects();
         List<RoomCard> rooms = RoomCard.generateObjects();
@@ -76,6 +77,7 @@ public class Cluedo {
         // Create Game
         this.currentGame = new Game(players, solution, weapons, rooms, characters);
         this.board = currentGame.getBoard();
+
     }
 
     /**
