@@ -45,13 +45,13 @@ public class BoardCanvas extends Canvas {
     private Font font;
     private Cluedo cluedo;
     private final Game game;
-    private final Board board;
+    private final Board board = null;
     private Image boardImage;
 
     public BoardCanvas(Cluedo cluedo) {
         this.cluedo = cluedo;
         this.game = cluedo.getGame();
-        this.board = game.getBoard();
+     //   this.board = game.getBoard();
         this.boardImage = loadImage("boardImage.png");
         setVisible(true);
     }

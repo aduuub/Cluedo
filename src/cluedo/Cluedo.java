@@ -30,7 +30,7 @@ public class Cluedo {
      * Construct a new game of Cluedo
      */
     public Cluedo() {
-        startGame();
+       // startGame();
         //runGame();
     }
 
