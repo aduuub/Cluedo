@@ -8,6 +8,11 @@
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 .idea
+<<<<<<< HEAD
+=======
+.idea/
+
+>>>>>>> f51bfad166935cfe910b36045013b9258bcc001e
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids

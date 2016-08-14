@@ -30,6 +30,7 @@ public class Cluedo {
      * Construct a new game of Cluedo
      */
     public Cluedo() {
+
     }
 
     /**

@@ -50,7 +50,7 @@ public class BoardFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvas.requestFocus();
 
-        CharachtersDialog dialog = new CharachtersDialog(this);
+        CharachtersDialog dialog = new CharachtersDialog(this, cluedo);
     }
 
     public void setMenuBar() {
