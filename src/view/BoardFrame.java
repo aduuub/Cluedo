@@ -48,6 +48,10 @@ public class BoardFrame extends JFrame {
         add(canvas, BorderLayout.CENTER);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         canvas.requestFocus();
+
+        CharachtersDialog dialog = new CharachtersDialog(this);
+
+
     }
 
     public void setMenuBar() {
@@ -102,6 +106,12 @@ public class BoardFrame extends JFrame {
         EventQueue.invokeLater(() -> {
             BoardFrame ex = new BoardFrame("Adam", new Game(null, null, null, null, null), new KeyListener[0]);
             ex.setVisible(true);
+
         });
+
+
+
+
+
     }
 }
