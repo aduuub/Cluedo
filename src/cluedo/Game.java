@@ -47,8 +47,6 @@ public class Game {
 //        this.finished = false;
 //        this.board = Board.parseBoard(boardFile);
 //        board.setSpawnLocations(players);
-//        System.out.println("\n");
-//        System.out.println(board.toString());
     }
 
     /**
